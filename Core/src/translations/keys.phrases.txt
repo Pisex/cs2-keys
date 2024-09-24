@@ -1,0 +1,50 @@
+"Phrases"
+{
+    "Prefix"
+    {
+        "ru"    "[KEYS] "
+        "en"    "[KEYS] "
+    }
+    
+	"USAGE_ERROR_USE_KEY"
+	{
+		"ru"	"Используйте: !key <ключ>"
+		"en"	"Usage: !key <key>"
+	}
+
+	"ERROR_INCORRECT_KEY_LEFT"
+	{
+		"ru"	"Вы ввели неверный ключ! Осталось попыток: %i"
+		"en"	"You have entered incorrect key! Attempts remaining: %i"
+	}
+
+	"ERROR_INCORRECT_KEY"
+	{
+		"ru"	"Некорректный ключ!"
+		"en"	"Incorrect key!"
+	}
+
+	"ERROR_BLOCKED"
+	{
+		"ru"	"Вы были заблокированы и не можете использовать ключи!"
+		"en"	"You have been blocked and can not use keys!"
+	}
+
+	"SUCCESS_USE_KEY"
+	{
+		"ru"	"Вы успешно использовали ключ: %s!"
+		"en"	"You have successfully used the key: %s!"
+	}
+
+	"ERROR_KEY_ALREADY_USED"
+	{
+		"ru"	"Вы уже использовали этот ключ!"
+		"en"	"You have already used this key!"
+	}
+
+	"ERROR_KEY_NOT_EXIST"
+	{
+		"ru"	"Ключ не существует!"
+		"en"	"The key does not exist!"
+	}
+}
