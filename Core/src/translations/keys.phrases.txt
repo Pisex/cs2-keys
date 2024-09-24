@@ -47,4 +47,46 @@
 		"ru"	"Ключ не существует!"
 		"en"	"The key does not exist!"
 	}
+	
+	"ERROR_CAN_NOT_USE"
+	{
+		"ru"	"Вы не можете использовать этот ключ!"
+		"en"	"You can not use this key!"
+	}
+	
+	"USE_KEY_GRP_CNG"
+	{
+		"ru"	"Ваша VIP-группа изменена на %s!"
+		"en"	"Your VIP-group has been changed to %s!"
+	}
+	
+	"USE_KEY_EXT"
+	{
+		"ru"	"Ваш VIP-статус продлен!"
+		"en"	"Your VIP-status has been extended!"
+	}
+
+	"USE_KEY_EXT_FOREVER"
+	{
+		"ru"	"Ваш VIP-статус продлен навсегда!"
+		"en"	"Your VIP-status has been extended forever!"
+	}
+
+	"ERROR_VIP_ALREADY"
+	{
+		"ru"	"У вас уже есть VIP-статус!"
+		"en"	"You already have a VIP-status!"
+	}
+
+	"ERROR_INVALID_GROUP"
+	{
+		"ru"	"Неверная группа!"
+		"en"	"Invalid group!"
+	}
+
+	"ERROR_ALREADY_VIP_GROUP"
+	{
+		"ru"	"У вас уже установлена эта VIP-группа!"
+		"en"	"You already have this VIP-group!"
+	}
 }

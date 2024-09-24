@@ -61,77 +61,77 @@ void PrintToChat(int iSlot, const char *msg, ...)
 	g_pUtils->PrintToChat(iSlot, "%s %s", g_vecPhrases[std::string("Prefix")].c_str(), buf);
 }
 
-static const int g_iNumbers[] = {0x30, 0x39};
-static const int g_iLettersUpper[] = {0x41, 0x5A};
-static const int g_iLettersLower[] = {0x61, 0x7A};
+// static const int g_iNumbers[] = {0x30, 0x39};
+// static const int g_iLettersUpper[] = {0x41, 0x5A};
+// static const int g_iLettersLower[] = {0x61, 0x7A};
 
 
-int GenerateRandomInt(int iMin, int iMax)
-{
-	return iMin + (rand() % (iMax - iMin + 1));
-}
+// int GenerateRandomInt(int iMin, int iMax)
+// {
+// 	return iMin + (rand() % (iMax - iMin + 1));
+// }
 
-int RoundToCeil(float fValue)
-{
-	return (fValue - int(fValue) > 0) ? int(fValue) + 1 : int(fValue);
-}
+// int RoundToCeil(float fValue)
+// {
+// 	return (fValue - int(fValue) > 0) ? int(fValue) + 1 : int(fValue);
+// }
 
-int GetRandomInt(int iMin, int iMax)
-{
-	int iRandom = GenerateRandomInt(1, 2147483647);
-	if (iRandom == 0)
-	{
-		++iRandom;
-	}
+// int GetRandomInt(int iMin, int iMax)
+// {
+// 	int iRandom = GenerateRandomInt(1, 2147483647);
+// 	if (iRandom == 0)
+// 	{
+// 		++iRandom;
+// 	}
 
-	return RoundToCeil(float(iRandom) / (float(2147483647) / float(iMax - iMin + 1))) + iMin - 1;
-}
+// 	return RoundToCeil(float(iRandom) / (float(2147483647) / float(iMax - iMin + 1))) + iMin - 1;
+// }
 
-int GetCharTemplate(int iChar)
-{
-	switch (iChar)
-	{
-	case 0x41:
-		return GenerateRandomInt(1, 20) > 10 ? GetRandomInt(g_iLettersUpper[0], g_iLettersUpper[1]) : GetRandomInt(g_iLettersLower[0], g_iLettersLower[1]);
-		break;
-	case 0x42:
-		return GetRandomInt(g_iNumbers[0], g_iNumbers[1]);
-		break;
-	case 0x58:
-		return GenerateRandomInt(0, 2) == 1 ? GetRandomInt(g_iNumbers[0], g_iNumbers[1]) : GenerateRandomInt(1, 20) > 10 ? GetRandomInt(g_iLettersUpper[0], g_iLettersUpper[1]) : GetRandomInt(g_iLettersLower[0], g_iLettersLower[1]);
-		break;
-	default:
-		return iChar;
-		break;
-	}
+// int GetCharTemplate(int iChar)
+// {
+// 	switch (iChar)
+// 	{
+// 	case 0x41:
+// 		return GenerateRandomInt(1, 20) > 10 ? GetRandomInt(g_iLettersUpper[0], g_iLettersUpper[1]) : GetRandomInt(g_iLettersLower[0], g_iLettersLower[1]);
+// 		break;
+// 	case 0x42:
+// 		return GetRandomInt(g_iNumbers[0], g_iNumbers[1]);
+// 		break;
+// 	case 0x58:
+// 		return GenerateRandomInt(0, 2) == 1 ? GetRandomInt(g_iNumbers[0], g_iNumbers[1]) : GenerateRandomInt(1, 20) > 10 ? GetRandomInt(g_iLettersUpper[0], g_iLettersUpper[1]) : GetRandomInt(g_iLettersLower[0], g_iLettersLower[1]);
+// 		break;
+// 	default:
+// 		return iChar;
+// 		break;
+// 	}
 
-	return iChar;
-}
+// 	return iChar;
+// }
 
-void GenerateKey(std::string& sKey)
-{
-	sKey[0] = '\0';
-	int i = 0;
-	if(g_sKeyTemplate[0])
-	{
-		int iLength = strlen(g_sKeyTemplate);
-		while(i < iLength)
-		{
-			sKey[i] = GetCharTemplate(g_sKeyTemplate[i]);
-			++i;
-		}
-	}
-	else
-	{
-		while(i < g_iKeyLength)
-		{
-			sKey[i] = GetCharTemplate(0x58);
-			++i;
-		}
-	}
+// void GenerateKey(std::string& sKey)
+// {
+// 	sKey[0] = '\0';
+// 	int i = 0;
+// 	if(g_sKeyTemplate[0])
+// 	{
+// 		int iLength = strlen(g_sKeyTemplate);
+// 		while(i < iLength)
+// 		{
+// 			sKey[i] = GetCharTemplate(g_sKeyTemplate[i]);
+// 			++i;
+// 		}
+// 	}
+// 	else
+// 	{
+// 		while(i < g_iKeyLength)
+// 		{
+// 			sKey[i] = GetCharTemplate(0x58);
+// 			++i;
+// 		}
+// 	}
 
-	sKey[i] = '\0';
-}
+// 	sKey[i] = '\0';
+// }
 
 bool IsKeyValid(std::string sKey, std::string& sError)
 {
@@ -466,11 +466,12 @@ bool UseKeyCmd(int iSlot, const char* szContent)
 					}
 					szParams.push_back(pResultSet->GetString(i));
 				}
-				std::string szError;
+				const char* szError;
 				bool bResult = g_vecKeyUseCallbacks[szType](iSlot, szKey, szParams, szError);
 				if(!bResult)
 				{
-					PrintToChat(iSlot, szError.c_str());
+					Msg("Error: %s\n", szError);
+					PrintToChat(iSlot, szError);
 					return;
 				}
 
@@ -576,8 +577,8 @@ void keys_core::AllPluginsLoaded()
 			return;
 		}
 
-		g_iKeyLength = pKVConfig->GetInt("key_length", 32);
-		g_sKeyTemplate = pKVConfig->GetString("key_template", "");
+		// g_iKeyLength = pKVConfig->GetInt("key_length", 32);
+		// g_sKeyTemplate = pKVConfig->GetString("key_template", "");
 		g_iAttempt = pKVConfig->GetInt("key_attempts", 3);
 		g_iBlockTime = pKVConfig->GetInt("key_block_time", 60);
 	}
@@ -672,7 +673,7 @@ void keys_core::AllPluginsLoaded()
 	}
 
 
-	g_pUtils->RegCommand(g_PLID, {"key", "usekey"}, {}, UseKeyCmd);
+	g_pUtils->RegCommand(g_PLID, {"key", "usekey"}, {"!key", "!usekey"}, UseKeyCmd);
 	g_pUtils->StartupServer(g_PLID, StartupServer);
 	g_pPlayers->HookOnClientAuthorized(g_PLID, OnClientAuthorized);
 }
@@ -741,7 +742,7 @@ const char* keys_core::GetDescription()
 
 const char* keys_core::GetName()
 {
-	return "[Kyes] Core";
+	return "[Keys] Core";
 }
 
 const char* keys_core::GetURL()
